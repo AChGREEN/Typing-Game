@@ -148,7 +148,6 @@ void save_high_score(double score) {
 
 int choose_difficulty(void) {
     char input[10];
-
     printf("Choose a difficulty:\n");
     printf("  1) Easy\n");
     printf("  2) Medium\n");
@@ -178,11 +177,16 @@ void play_round(double *high_score) {
     printf("\nType this sentence exactly as shown, then press Enter:\n\n");
     printf("  %s\n\n", sentence);
     printf("Press Enter when you're ready to start...");
-    getchar(); // just eating the enter key so the timer doesn't start early
+    
+    // Safely clear the input buffer until a newline is reached
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
 
     start_time = get_time_ms();
 
     printf("GO: ");
+    fflush(stdout); // <--- CRITICAL: Forces "GO: " to appear on the screen immediately
+
     if (fgets(typed, sizeof(typed), stdin) == NULL) {
         printf("didn't catch that, try again next round\n");
         return;
@@ -192,16 +196,18 @@ void play_round(double *high_score) {
     strip_newline(typed);
 
     elapsed_seconds = (end_time - start_time) / 1000.0;
+    
+    if (elapsed_seconds <= 0) {
+        elapsed_seconds = 0.001; 
+    }
+
     elapsed_minutes = elapsed_seconds / 60.0;
 
-    // standard wpm formula - every 5 chars counts as a "word"
     int word_count = strlen(sentence) / 5;
-    wpm = (elapsed_minutes > 0) ? word_count / elapsed_minutes : 0;
-
+    wpm = word_count / elapsed_minutes;
     accuracy = calculate_accuracy(sentence, typed);
 
     print_diff(sentence, typed);
-
     printf("\n---- Results ----\n");
     printf("Time taken : %.2f seconds\n", elapsed_seconds);
     printf("Speed      : %.1f WPM\n", wpm);
