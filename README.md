@@ -2,8 +2,8 @@ Overview:
 This is a simple command line game made in C which is played by typing the prompt shown. It shows your accuracy, WPM and time taken with sentence diffculty levels ranging for easy, medium and hard.
 
 How to Run:
-1. download the release; executable file
-2. run the typing_game.exe files
+1. download the executable file from the latest release
+2. run the typing_game.exe file
 3. have fun typing :D
    
 Tech Stack:
