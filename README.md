@@ -1,5 +1,13 @@
 # Overview:
-This is a simple command line game made in C which is played by typing the prompt shown. It shows your accuracy, WPM and time taken with sentence diffculty levels ranging for easy, medium and hard.
+A command-line typing speed test written in C. It gives you a sentence, times how long you take to type it, and tells you your WPM and accuracy. I made this as a small project to get more comfortable with C, and it ended up being a good excuse to mess with timing, string handling, and file I/O.
+
+## Features
+- Three difficulty levels (easy, medium, hard) with different sentence lengths and word complexity
+- Times you precisely and accurately
+- Calculates your WPM and accuracy
+- Colored character-by-character breakdown of what you typed (green = correct, red = wrong)
+- Saves your best WPM to highscore.txt so you can see your progress
+- Made for Windows but may work on Linux or Mac; not optimised for it.
 <img width="1766" height="800" alt="image" src="https://github.com/user-attachments/assets/5ee4ed74-4cb5-4b8c-97fa-d1065273f358" />
 
 # How to Run:
